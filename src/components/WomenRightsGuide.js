@@ -6,10 +6,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button,
   Box,
-  IconButton,
-  Tooltip,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -21,31 +18,29 @@ import {
   InputAdornment,
   alpha,
 } from "@mui/material";
-import { Share, ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
+import logo from "../images/MCSLogo.png";
+import backgroundImage from "../images/BG-Main.jpg";
 
-// Import Halant font
 import "@fontsource/halant";
-
-// Background image URL
-const backgroundImageUrl = "/api/placeholder/1920/1080"; // Replace with actual image URL
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#8E4585", // Deep purple
-      light: "#B176A8",
-      dark: "#6C1D63",
+      main: "#50352c", // Deep brown
+      light: "#50352c",
+      dark: "#50352c",
     },
     secondary: {
-      main: "#FFA69E", // Soft pink
+      main: "#50352c", // Soft brown
     },
     background: {
       default: "#FAF3DD", // Light cream
       paper: "#F8E9E9", // Very light pink
     },
     text: {
-      primary: "#2C363F", // Dark gray
-      secondary: "#445566", // Medium gray
+      primary: "#black", // Black
+      secondary: "#black", // Black
     },
   },
   typography: {
@@ -55,7 +50,7 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: `
         body {
-          background-image: url(${backgroundImageUrl});
+          background-image: url(${backgroundImage});
           background-size: cover;
           background-attachment: fixed;
         }
@@ -277,21 +272,6 @@ const WomenRightsGuide = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Empowher: Indian Women's Rights Guide",
-          text: "Check out this comprehensive guide on women's rights and laws in India",
-          url: window.location.href,
-        })
-        .catch((error) => console.log("Error sharing", error));
-    } else {
-      console.log("Web Share API not supported");
-      // Fallback: You could copy the URL to clipboard here
-    }
-  };
-
   const filteredLawsData = useMemo(() => {
     if (!searchTerm) return lawsData;
     return lawsData
@@ -314,39 +294,36 @@ const WomenRightsGuide = () => {
           elevation={6}
           sx={{
             p: 4,
-            backgroundImage: `url(${backgroundImageUrl})`,
+            borderRadius: 4,
             backgroundSize: "cover",
             boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
-            borderRadius: 4,
           }}
         >
           <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
             mb={2}
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
           >
             <Typography
               variant="h4"
-              component="h1"
               gutterBottom
-              fontWeight="bold"
+              component="h1"
               color="primary"
+              fontWeight="bold"
             >
-              Empowher: Indian Women's Rights Guide
+              Empower: Indian Women's Rights Guide
             </Typography>
             <Box>
-              {/* Placeholder for logo */}
               <img
-                src="/api/placeholder/100/50"
-                alt="Empowher Logo"
-                style={{ marginRight: "16px" }}
+                src={logo}
+                alt="SHRI MAHARANI CHIMNABAI STREE UDYOGALAYA"
+                style={{
+                  width: "100px",
+                  height: "auto",
+                  transition: "width 0.3s ease",
+                }}
               />
-              <Tooltip title="Share this guide">
-                <IconButton onClick={handleShare} color="primary">
-                  <Share />
-                </IconButton>
-              </Tooltip>
             </Box>
           </Box>
           <Typography variant="subtitle1" gutterBottom color="text.secondary">
@@ -432,24 +409,6 @@ const WomenRightsGuide = () => {
               </AccordionDetails>
             </Accordion>
           ))}
-          <Box mt={4} textAlign="center">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleShare}
-              sx={{
-                px: 4,
-                py: 1.5,
-                fontSize: "1.1rem",
-                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                "&:hover": {
-                  boxShadow: "0 6px 8px rgba(0,0,0,0.15)",
-                },
-              }}
-            >
-              Share This Guide
-            </Button>
-          </Box>
         </Paper>
       </Container>
     </ThemeProvider>
